@@ -16,7 +16,7 @@ public class Cliente {
     private String nome;
     private String email;
     private String telefone;
-    private String Endereco;
+    private String endereco;
     private boolean status_cliente;
 
     public String getNome() {
