@@ -19,6 +19,14 @@ public class Cliente {
     private String endereco;
     private boolean status_cliente;
 
+    public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
     public String getNome() {
         return nome;
     }
@@ -38,13 +46,14 @@ public class Cliente {
         this.telefone = telefone;
     }
     public String getEndereco() {
-        return Endereco;
+        return endereco;
     }
-    public void setEndereco(String endereco) {
-        Endereco = endereco;
+    public void setEndereco(String endereco1) {
+        endereco = endereco1;
     }
 
-        public boolean isStatus_cliente() {
+
+    public boolean isStatus_cliente() {
         return status_cliente;
     }
     public void setStatus_cliente(boolean status_cliente) {

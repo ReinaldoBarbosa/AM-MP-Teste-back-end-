@@ -26,18 +26,18 @@
                 <table class="table table-striped table-respondive-md">
                     <thead>
                         <tr>
-                            <th>Id</th>
+
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Telefone</th>
                             <th>Endereço</th>
+                            <th>Status</th>
                             <th>Editar</th>
                             <th>Excluir</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="Cliente : ${listaDeCliente}">
-                            <td th:text="${cliente.id}"></td>
+                        <tr th:each="cliente : ${cliente}">
                             <td th:text="${cliente.nome}"></td>
                             <td th:text="${cliente.email}"></td>
                             <td th:text="${cliente.telefone}"></td>
