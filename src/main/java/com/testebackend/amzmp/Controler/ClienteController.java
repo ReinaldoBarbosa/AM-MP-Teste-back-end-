@@ -1,6 +1,12 @@
 package com.testebackend.amzmp.Controler;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,22 +18,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
 import com.testebackend.amzmp.Model.Cliente;
 import com.testebackend.amzmp.Repository.ClienteRepository;
 
-
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-
-
-
-
 
 
 @Controller
@@ -55,16 +56,43 @@ public class ClienteController {
     @GetMapping("/novo-cliente")
     public String CadastrarCliente(Cliente cliente, Model model) {
         model.addAttribute("cliente", cliente);
-        return "novo-cliente";
+        return "cadastro";
     }
     
     //Cadastrar (inserir)
 
     @PostMapping("/add-cliente")
-    public String addClinte(Cliente cliente, BindingResult result, Model model) {
+    public String addClinte(Cliente cliente, BindingResult result, Model model) throws Exception {
         if (result.hasErrors()) {
                 return "/novo-cliente";
         }
+
+        //**Implementando a Api de Cep
+
+        URL url = new URL("https://viacep.com.br/ws/" + cliente.getCep() + "/json/");
+        URLConnection connection =url.openConnection();
+
+        
+        InputStream is = connection.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+        String cep ="";
+        StringBuilder jsonCep = new StringBuilder();
+
+        while ((cep = br.readLine()) != null) {
+            jsonCep.append(cep);
+        }
+
+        Cliente clienteAux = new Gson().fromJson(jsonCep.toString(), Cliente.class);
+
+        cliente.setCep(clienteAux.getCep());
+        cliente.setLogradouro(clienteAux.getLogradouro());
+        cliente.setComplemento(clienteAux.getComplemento());
+        cliente.setBairro(clienteAux.getBairro());
+        cliente.setLocalidade(clienteAux.getLocalidade());
+        cliente.setUf(clienteAux.getUf());
+
+        //**Implementando a Api de Cep
 
         Cliente clienteDb = clienteRepository.save(cliente);
         cliente.setStatus_cliente(true);
@@ -80,7 +108,7 @@ public class ClienteController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid cliente id:" + id));
 
         model.addAttribute("cliente", cliente);
-        return "novo-cliente";
+        return "cadastro";
     }
 
     @PostMapping("/update/{id}")
@@ -96,5 +124,9 @@ public class ClienteController {
 		return "redirect:/uniao-voluntaria/usuario/listar-usuario";
 	}
     
-
+    @GetMapping("/deletar/{id}")
+	public String delete(Cliente cliente, @PathVariable("id") Long id) {
+		clienteRepository.deleteById(id);
+		return "redirect:/amz-mp/cliente/listar-cliente";
+	}
 }

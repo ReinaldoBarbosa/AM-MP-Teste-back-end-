@@ -30,8 +30,8 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Telefone</th>
-                            <th>Endereço</th>
-                            <th>Status</th>
+                            <th>Cep</th>
+                            <th>Logradouro</th>
                             <th>Editar</th>
                             <th>Excluir</th>
                         </tr>
@@ -41,10 +41,10 @@
                             <td th:text="${cliente.nome}"></td>
                             <td th:text="${cliente.email}"></td>
                             <td th:text="${cliente.telefone}"></td>
-                            <td th:text="${cliente.endereco}"></td>
-                            <td th:text="${cliente.status_cliente} ? 'Ativo' : 'Inativo'"></td>
-                            <td> <a href="#">Editar</a> </td>
-                            <td> <a href="#">Excluir</a> </td>
+                            <td th:text="${cliente.cep}"></td>
+                            <td th:text="${cliente.logradouro}"></td>
+                            <td> <a th:href="@{/amz-mp/cliente/editar/{id}(id=${cliente.id})}">Editar</a> </td>
+                            <td> <a th:href="@{/amz-mp/cliente/deletar/{id}(id=${cliente.id})}">Excluir</a> </td>
                         </tr>
                     </tbody>
                 </table>

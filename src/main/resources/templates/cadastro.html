@@ -21,18 +21,28 @@
     </div>
     <div class="row">
         <div class="border p-2">
-              <form th:action="@{/amz-mp/adm/add-adm}" th:object="${adm}" method="post">
+              <form th:action="@{/amz-mp/cliente/add-cliente}" th:object="${cliente}" method="post">
                 <div class="row">
+                       
+                    <div class="form-group col-md-12">
+                        <label for="nome" class="col-form-label">Nome:</label>
+                        <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Nome">
+
+                    </div>
 
                     <div class="form-group col-md-12">
                         <label for="email" class="col-form-label">Email:</label>
                         <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Emial">
                     </div>
 
+                    <div class="form-group col-md-5">
+                        <label for="telefone" class="col-form-label">Telefone:</label>
+                        <input type="text" th:field="*{telefone}" class="form-control" id="telefone" placeholder="Telefone">
+                    </div>
 
                     <div class="form-group col-md-5">
-                        <label for="senha" class="col-form-label">Senha:</label>
-                        <input type="password" th:field="*{senha}" class="form-control" id="senha" placeholder="Endereço">
+                        <label for="cep" class="col-form-label">Cep:</label>
+                        <input type="text" th:field="*{cep}" class="form-control" id="cep" placeholder="Cep">
                     </div>
                     
                     <div class="form-group col-md-12">

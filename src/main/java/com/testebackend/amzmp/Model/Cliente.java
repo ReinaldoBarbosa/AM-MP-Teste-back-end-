@@ -9,14 +9,21 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="cliente")
 public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Id // PK
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-Incremento de 1 em 1
+	private long id;
 
     private String nome;
     private String email;
     private String telefone;
-    private String endereco;
+
+    private String cep;
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+    
     private boolean status_cliente;
 
     public Long getId() {
@@ -45,13 +52,55 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    public String getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(String endereco1) {
-        endereco = endereco1;
+    public String getCep() {
+        return cep;
     }
 
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    
 
     public boolean isStatus_cliente() {
         return status_cliente;
