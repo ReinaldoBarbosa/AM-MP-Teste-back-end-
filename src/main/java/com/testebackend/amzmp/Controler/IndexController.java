@@ -7,28 +7,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/amz-mp/ap1")
+@RequestMapping("/amz-mp/api")
 public class IndexController {
     @GetMapping("/index")
     public String login() {
-        return "/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/painel")
     public String painel() {
-        return "/amz-mp/cliente/listar-cliente";
+        return "redirect:/amz-mp/cliente/listar-cliente";
     }
 
     @GetMapping("/cadastro")
     public String cadastro() {
-        return "/amz-mp/cliente/novo-cliente";
+        return "redirect:/cliente/novo-cliente";
     }
 
-     @GetMapping("/editar")
-    public String editar() {
-        return "/amz-mp/cliente/editar";
-    }
-
-    
-    
 }

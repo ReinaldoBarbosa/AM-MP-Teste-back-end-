@@ -22,18 +22,19 @@ public class LoginController {
         return "index";
     }
 
-    @PostMapping("/logar")
+    @PostMapping("/login")
 	public String login(Model model, Adm adm){
 
 		Adm admin = this.admRepository.Login(adm.getEmail(), adm.getSenha());
 
-		System.out.println(adm.getEmail() + adm.getSenha());
 		if(admin != null) {
-			return "redirect:/login";
+			return "redirect:/amz-mp/api/painel";
 		}
 		
 		model.addAttribute("erro", "Email ou senha invalidos");
 		return "index";
+
+		
 		
 
 		

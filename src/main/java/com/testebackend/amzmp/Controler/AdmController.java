@@ -25,6 +25,10 @@ public class AdmController {
 
     @GetMapping("/novo-adm")
     public String CadastrarCliente(Adm adm, Model model) {
+
+        adm.setEmail("admin@admin.com");
+        adm.setSenha("admin");
+
         model.addAttribute("adm", adm);
         return "novo-cliente";
     }
@@ -33,9 +37,10 @@ public class AdmController {
 
     @PostMapping("/add-adm")
     public String addClinte(Adm adm, BindingResult result, Model model) {
+        
 
         Adm admDb = admRepository.save(adm);
 
-        return "/login";
+        return "redirect:/login";
     }
 }
